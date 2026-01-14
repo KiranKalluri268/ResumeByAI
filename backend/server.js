@@ -8,7 +8,11 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || '*', // Allow all if not set, or specific URL
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const { extractText } = require('./utils/extractText');
